@@ -1,285 +1,120 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
+import "./lifedock.css";
 
 export default function NovaHome() {
-  /* =========================
-     STATES
-  ========================= */
-  const [tasks, setTasks] = useState([]);
-  const [input, setInput] = useState("");
-  const [notes, setNotes] = useState("");
+  const [quote, setQuote] = useState("");
+  const quotes = [
+    "Focus deeper. Build better days.",
+    "Small wins become strong lives.",
+    "Consistency beats intensity.",
+    "Protect your attention.",
+    "Momentum starts now."
+  ];
 
-  // Focus Timer
-  const [minutes, setMinutes] = useState(25);
-  const [seconds, setSeconds] = useState(0);
-  const [running, setRunning] = useState(false);
-
-  /* =========================
-     GREETING
-  ========================= */
-  const hour = new Date().getHours();
-
-  let greeting = "Good Evening";
-
-  if (hour < 12) greeting = "Good Morning";
-  else if (hour < 18) greeting = "Good Afternoon";
-
-  /* =========================
-     TASKS
-  ========================= */
-  const addTask = () => {
-    if (!input.trim()) return;
-
-    setTasks([
-      {
-        id: Date.now(),
-        title: input,
-        done: false,
-      },
-      ...tasks,
-    ]);
-
-    setInput("");
-  };
-
-  const toggleTask = (id) => {
-    setTasks(
-      tasks.map((task) =>
-        task.id === id
-          ? { ...task, done: !task.done }
-          : task
-      )
-    );
-  };
-
-  const completed = tasks.filter((task) => task.done).length;
-
-  const progress =
-    tasks.length === 0
-      ? 0
-      : Math.round((completed / tasks.length) * 100);
-
-  /* =========================
-     TIMER WITH ALARM
-  ========================= */
   useEffect(() => {
-    let timer;
+    setQuote(
+      quotes[Math.floor(Math.random() * quotes.length)]
+    );
+  }, []);
 
-    if (running) {
-      timer = setInterval(() => {
-        if (seconds > 0) {
-          setSeconds((prev) => prev - 1);
-        } else {
-          if (minutes > 0) {
-            setMinutes((prev) => prev - 1);
-            setSeconds(59);
-          } else {
-            // Finished
-            setRunning(false);
-            setMinutes(0);
-            setSeconds(0);
-
-            const audio = new Audio(
-              "https://actions.google.com/sounds/v1/alarms/alarm_clock.ogg"
-            );
-
-            audio.play();
-
-            alert("⏰ Focus session complete!");
-          }
-        }
-      }, 1000);
-    }
-
-    return () => clearInterval(timer);
-  }, [running, minutes, seconds]);
-
-  /* =========================
-     UI
-  ========================= */
   return (
     <div className="nova-shell">
       <div className="nova-glow"></div>
 
-      {/* HEADER */}
-   <header className="nova-header">
-  <div className="brand">
-    <img
-      src="/Nova.png"
-      alt="Nova Logo"
-      className="brand-logo"
-    />
+      <header className="nova-header">
+        <div className="brand">
+          <img
+            src="/Nova.png"
+            alt="Nova"
+            className="brand-logo"
+          />
 
-    <div>
-      <p className="muted">Welcome Back</p>
-
-      <h1>Nova</h1>
-
-      <span className="muted">
-        Private productivity system
-      </span>
-    </div>
-  </div>
-
-  <button className="ghost-btn">
-    Dashboard
-  </button>
-</header>
-
-      <div className="nova-grid">
-        {/* LEFT SIDE */}
-        <div>
-          {/* HERO */}
-          <section className="hero-card">
-            <div>
-              <p className="muted small">MISSION</p>
-
-              <h2>
-                Design your day.
-                <br />
-                Protect your future.
-              </h2>
-            </div>
-
-            <div className="ring">{progress}%</div>
-          </section>
-
-          {/* TASKS */}
-          <section className="panel">
-            <h3 className="section-title">
-              Priority Flow
-            </h3>
-
-            <div className="task-row">
-              <input
-                value={input}
-                onChange={(e) =>
-                  setInput(e.target.value)
-                }
-                placeholder="Enter next priority..."
-              />
-
-              <button onClick={addTask}>
-                Add
-              </button>
-            </div>
-
-            <div className="task-list">
-              {tasks.length === 0 ? (
-                <div className="empty">
-                  No priorities yet. Begin
-                  intentionally.
-                </div>
-              ) : (
-                tasks.map((task) => (
-                  <div
-                    className="task-card"
-                    key={task.id}
-                  >
-                    <button
-                      className="check"
-                      onClick={() =>
-                        toggleTask(task.id)
-                      }
-                    >
-                      {task.done ? "✓" : ""}
-                    </button>
-
-                    <span
-                      className={
-                        task.done ? "done" : ""
-                      }
-                    >
-                      {task.title}
-                    </span>
-                  </div>
-                ))
-              )}
-            </div>
-          </section>
+          <div>
+            <p className="muted small">
+              PRIVATE PRODUCTIVITY SYSTEM
+            </p>
+            <h1>Nova</h1>
+            <span className="muted">
+              Designed for clarity & execution
+            </span>
+          </div>
         </div>
 
-        {/* RIGHT SIDE */}
+        <button className="ghost-btn">
+          Today
+        </button>
+      </header>
+
+      <section className="hero-card lift">
         <div>
-          {/* DEEP FOCUS */}
-          <section className="side-card">
-            <h3 className="section-title">
-              Deep Focus
-            </h3>
+          <p className="muted small">
+            DAILY FOCUS
+          </p>
 
-            <div className="timer">
-              {String(minutes).padStart(
-                2,
-                "0"
-              )}
-              :
-              {String(seconds).padStart(
-                2,
-                "0"
-              )}
-            </div>
+          <h2>{quote}</h2>
 
-            <input
-              type="number"
-              min="1"
-              className="focus-input"
-              placeholder="Set Minutes"
-              onChange={(e) => {
-                setMinutes(
-                  Number(e.target.value)
-                );
-                setSeconds(0);
-              }}
-            />
+          <p className="muted hero-sub">
+            Remove friction. Build rhythm.
+            Keep promises to yourself.
+          </p>
+        </div>
 
-            <button
-              className="primary-btn"
-              onClick={() =>
-                setRunning(true)
-              }
-            >
-              Start
-            </button>
+        <div className="ring pulse">
+          Ready
+        </div>
+      </section>
 
-            <button
-              className="ghost-btn full-btn"
-              onClick={() =>
-                setRunning(false)
-              }
-            >
-              Pause
-            </button>
+      <div className="nova-grid">
+        <div className="panel lift">
+          <div className="section-title">
+            Priority Tasks
+          </div>
 
-            <button
-              className="ghost-btn full-btn"
-              onClick={() => {
-                setRunning(false);
-                setMinutes(25);
-                setSeconds(0);
-              }}
-            >
-              Reset
-            </button>
-          </section>
+          <div className="task-row">
+            <input placeholder="What matters most today?" />
+            <button>Add</button>
+          </div>
 
-          {/* NOTES */}
-          <section
-            className="side-card"
-            style={{
-              marginTop: "24px",
-            }}
-          >
-            <h3 className="section-title">
-              Thought Space
-            </h3>
+          <div className="empty">
+            No tasks yet. Add one meaningful step.
+          </div>
+        </div>
 
-            <textarea
-              value={notes}
-              onChange={(e) =>
-                setNotes(e.target.value)
-              }
-              placeholder="Write ideas, plans, reflections..."
-            />
-          </section>
+        <div className="side-card lift">
+          <div className="section-title">
+            Deep Focus
+          </div>
+
+          <div className="timer">
+            25:00
+          </div>
+
+          <button className="primary-btn">
+            Start Session
+          </button>
+        </div>
+
+        <div className="panel lift">
+          <div className="section-title">
+            Notes
+          </div>
+
+          <textarea placeholder="Capture ideas, plans, reflections..." />
+        </div>
+
+        <div className="side-card lift">
+          <div className="section-title">
+            System Status
+          </div>
+
+          <p className="muted">
+            Private. Secure. Built for focus.
+          </p>
+
+          <div className="status-dot-row">
+            <span className="dot"></span>
+            Online
+          </div>
         </div>
       </div>
     </div>
