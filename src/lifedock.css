@@ -1,7 +1,4 @@
-/* ==================================
-   NOVA / LIFE DOCK - FULL FINAL CSS
-   Replace entire lifedock.css
-================================== */
+/* ========= ELITE NOVA CSS ========= */
 
 *{
   margin:0;
@@ -14,40 +11,30 @@
   --panel:rgba(255,255,255,.05);
   --panel2:rgba(255,255,255,.08);
   --border:rgba(255,255,255,.08);
-  --text:#ffffff;
-  --muted:#a1a1aa;
+  --text:#fff;
+  --muted:#9ca3af;
   --blue:#3b82f6;
   --violet:#8b5cf6;
 }
 
 body{
-  font-family:Inter,system-ui,-apple-system,sans-serif;
+  font-family:Inter,system-ui,sans-serif;
   background:var(--bg);
   color:var(--text);
   overflow-x:hidden;
 }
 
-button,
-input,
-textarea{
+button,input,textarea{
   font-family:inherit;
+  border:none;
+  outline:none;
 }
 
 button{
-  border:none;
   cursor:pointer;
 }
 
-input,
-textarea{
-  border:none;
-  outline:none;
-  color:white;
-}
-
-/* =============================
-   MAIN APP
-============================= */
+/* ========= MAIN ========= */
 
 .nova-shell{
   min-height:100vh;
@@ -55,62 +42,65 @@ textarea{
   margin:auto;
   padding:28px;
   position:relative;
-  overflow:hidden;
 }
 
 .nova-glow{
-  position:absolute;
+  position:fixed;
   inset:0;
   pointer-events:none;
   background:
     radial-gradient(circle at top right,
-    rgba(99,102,241,.25),transparent 30%),
+    rgba(99,102,241,.18),transparent 28%),
 
     radial-gradient(circle at bottom left,
-    rgba(59,130,246,.18),transparent 35%),
+    rgba(59,130,246,.14),transparent 30%),
 
     radial-gradient(circle at center,
-    rgba(139,92,246,.08),transparent 45%);
-  filter:blur(30px);
+    rgba(139,92,246,.07),transparent 45%);
+  filter:blur(38px);
 }
+
+/* ========= PANELS ========= */
 
 .nova-header,
 .hero-card,
 .panel,
-.side-card,
-.auth-card{
+.side-card{
   position:relative;
   z-index:2;
   background:var(--panel);
   border:1px solid var(--border);
   border-radius:28px;
   backdrop-filter:blur(18px);
-  -webkit-backdrop-filter:blur(18px);
-  box-shadow:0 24px 60px rgba(0,0,0,.35);
+  box-shadow:0 22px 60px rgba(0,0,0,.35);
 }
 
-/* =============================
-   HEADER
-============================= */
-
 .nova-header{
+  padding:28px;
+  margin-bottom:24px;
   display:flex;
   justify-content:space-between;
-  align-items:flex-start;
-  gap:24px;
-  padding:30px;
-  margin-bottom:24px;
+  align-items:center;
+  gap:18px;
+}
+
+.brand{
+  display:flex;
+  align-items:center;
+  gap:14px;
+}
+
+.brand-logo{
+  width:58px;
+  height:58px;
+  border-radius:16px;
+  object-fit:contain;
 }
 
 .nova-header h1{
-  font-size:68px;
+  font-size:56px;
   line-height:1;
   letter-spacing:-2px;
-  margin:10px 0;
-}
-
-.muted{
-  color:var(--muted);
 }
 
 .small{
@@ -119,46 +109,30 @@ textarea{
   text-transform:uppercase;
 }
 
-.ghost-btn{
-  padding:13px 18px;
-  border-radius:18px;
-  background:rgba(255,255,255,.06);
-  color:white;
-  transition:.25s ease;
+.muted{
+  color:var(--muted);
 }
 
-.ghost-btn:hover{
-  background:rgba(255,255,255,.12);
-  transform:translateY(-2px);
-}
-
-/* =============================
-   GRID
-============================= */
-
-.nova-grid{
-  display:grid;
-  grid-template-columns:2fr 1fr;
-  gap:24px;
-}
-
-/* =============================
-   HERO
-============================= */
+/* ========= HERO ========= */
 
 .hero-card{
   padding:34px;
   margin-bottom:24px;
   display:flex;
   justify-content:space-between;
-  gap:24px;
   align-items:center;
+  gap:24px;
 }
 
 .hero-card h2{
-  font-size:48px;
+  font-size:46px;
   line-height:1.08;
+  max-width:700px;
   letter-spacing:-1px;
+}
+
+.hero-sub{
+  margin-top:14px;
 }
 
 .ring{
@@ -167,19 +141,21 @@ textarea{
   border-radius:50%;
   display:grid;
   place-items:center;
-  font-size:24px;
   font-weight:700;
   background:linear-gradient(
     135deg,
     rgba(59,130,246,.35),
     rgba(139,92,246,.35)
   );
-  border:1px solid rgba(255,255,255,.14);
 }
 
-/* =============================
-   PANELS
-============================= */
+/* ========= GRID ========= */
+
+.nova-grid{
+  display:grid;
+  grid-template-columns:2fr 1fr;
+  gap:24px;
+}
 
 .panel,
 .side-card{
@@ -188,13 +164,10 @@ textarea{
 
 .section-title{
   font-size:22px;
-  margin-bottom:18px;
-  font-weight:600;
+  margin-bottom:16px;
 }
 
-/* =============================
-   TASKS
-============================= */
+/* ========= TASK ========= */
 
 .task-row{
   display:flex;
@@ -207,10 +180,12 @@ textarea{
   padding:16px;
   border-radius:18px;
   background:rgba(255,255,255,.05);
+  color:white;
 }
 
-.task-row button{
-  padding:16px 24px;
+.task-row button,
+.primary-btn{
+  padding:16px 22px;
   border-radius:18px;
   color:white;
   background:linear-gradient(
@@ -220,83 +195,27 @@ textarea{
   );
 }
 
-.task-list{
-  display:grid;
-  gap:12px;
-}
-
-.task-card{
-  padding:16px;
-  border-radius:18px;
-  background:rgba(255,255,255,.04);
-  display:flex;
-  gap:12px;
-  align-items:center;
-}
-
-.check{
-  width:28px;
-  height:28px;
-  border-radius:50%;
-  background:#1f1f1f;
-  color:white;
-}
-
-.done{
-  text-decoration:line-through;
-  opacity:.45;
+.primary-btn{
+  width:100%;
 }
 
 .empty{
-  text-align:center;
-  padding:28px;
-  color:#777;
+  padding:24px;
+  border-radius:18px;
+  background:rgba(255,255,255,.03);
+  color:#8b8b8b;
 }
 
-/* =============================
-   TIMER
-============================= */
+/* ========= TIMER ========= */
 
 .timer{
   font-size:58px;
   font-weight:700;
   letter-spacing:-2px;
-  margin:14px 0 18px;
+  margin:12px 0 18px;
 }
 
-.focus-input{
-  width:100%;
-  padding:14px;
-  border-radius:16px;
-  margin-bottom:12px;
-  background:rgba(255,255,255,.05);
-}
-
-.primary-btn{
-  width:100%;
-  padding:15px;
-  border-radius:18px;
-  color:white;
-  background:linear-gradient(
-    90deg,
-    var(--blue),
-    var(--violet)
-  );
-  transition:.25s ease;
-}
-
-.primary-btn:hover{
-  transform:translateY(-2px);
-}
-
-.full-btn{
-  width:100%;
-  margin-top:10px;
-}
-
-/* =============================
-   NOTES
-============================= */
+/* ========= NOTES ========= */
 
 textarea{
   width:100%;
@@ -305,62 +224,71 @@ textarea{
   padding:16px;
   border-radius:18px;
   background:rgba(255,255,255,.05);
+  color:white;
 }
 
-/* =============================
-   AUTH PAGE
-============================= */
+/* ========= STATUS ========= */
 
-.auth-shell{
-  min-height:100vh;
-  display:grid;
-  place-items:center;
-  padding:24px;
-}
-
-.auth-card{
-  width:100%;
-  max-width:430px;
-  padding:34px;
-  display:grid;
-  gap:14px;
-}
-
-.auth-card h1{
-  font-size:46px;
-  text-align:center;
-}
-
-.auth-card input{
-  padding:15px;
-  border-radius:16px;
-  background:rgba(255,255,255,.05);
-}
-
-.divider{
-  text-align:center;
-  color:#888;
-  font-size:14px;
-  margin:4px 0;
-}
-
-.center-screen{
-  min-height:100vh;
-  display:grid;
-  place-items:center;
-  font-size:22px;
-}
-
-.top-bar{
+.status-dot-row{
+  margin-top:16px;
   display:flex;
-  justify-content:space-between;
   align-items:center;
-  padding:18px 24px;
+  gap:10px;
 }
 
-/* =============================
-   MOBILE
-============================= */
+.dot{
+  width:10px;
+  height:10px;
+  border-radius:50%;
+  background:#22c55e;
+  box-shadow:0 0 12px #22c55e;
+}
+
+/* ========= BUTTONS ========= */
+
+.ghost-btn{
+  padding:14px 18px;
+  border-radius:18px;
+  color:white;
+  background:rgba(255,255,255,.06);
+}
+
+button:hover{
+  transform:translateY(-2px);
+  transition:.22s ease;
+}
+
+/* ========= MOTION ========= */
+
+.lift{
+  animation:fadeUp .7s ease both;
+}
+
+.pulse{
+  animation:pulse 2s infinite;
+}
+
+@keyframes fadeUp{
+  from{
+    opacity:0;
+    transform:translateY(20px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+@keyframes pulse{
+  0%,100%{
+    transform:scale(1);
+  }
+  50%{
+    transform:scale(1.05);
+  }
+}
+
+/* ========= MOBILE ========= */
 
 @media(max-width:980px){
   .nova-grid{
@@ -377,24 +305,22 @@ textarea{
   .nova-header,
   .hero-card,
   .panel,
-  .side-card,
-  .auth-card{
+  .side-card{
     border-radius:22px;
   }
 
   .nova-header{
     flex-direction:column;
-    padding:22px;
+    align-items:flex-start;
   }
 
   .nova-header h1{
-    font-size:44px;
+    font-size:40px;
   }
 
   .hero-card{
     flex-direction:column;
     align-items:flex-start;
-    padding:24px;
   }
 
   .hero-card h2{
@@ -402,9 +328,8 @@ textarea{
   }
 
   .ring{
-    width:92px;
-    height:92px;
-    font-size:20px;
+    width:90px;
+    height:90px;
   }
 
   .task-row{
@@ -416,23 +341,66 @@ textarea{
   }
 
   .timer{
-    font-size:44px;
-  }
-
-  .top-bar{
-    flex-direction:column;
-    gap:12px;
+    font-size:42px;
   }
 }
-.brand{
-  display:flex;
-  align-items:center;
+/* ===== PREMIUM LOGIN RESTORE ===== */
+
+.auth-shell{
+  min-height:100vh;
+  display:grid;
+  place-items:center;
+  padding:24px;
+}
+
+.auth-card{
+  width:100%;
+  max-width:430px;
+  padding:34px;
+  border-radius:28px;
+  background:rgba(255,255,255,.06);
+  border:1px solid rgba(255,255,255,.08);
+  backdrop-filter:blur(20px);
+  box-shadow:0 25px 60px rgba(0,0,0,.45);
+  display:grid;
   gap:14px;
+  animation:fadeUp .6s ease;
 }
 
-.brand-logo{
-  width:56px;
-  height:56px;
+.auth-logo{
+  width:78px;
+  height:78px;
   object-fit:contain;
-  border-radius:14px;
+  margin:0 auto 8px;
+  display:block;
+}
+
+.auth-card h1{
+  text-align:center;
+  font-size:44px;
+  letter-spacing:-1px;
+}
+
+.auth-card .muted{
+  text-align:center;
+}
+
+.auth-card input{
+  padding:15px;
+  border-radius:16px;
+  background:rgba(255,255,255,.05);
+  color:white;
+}
+
+.divider{
+  text-align:center;
+  color:#8b8b8b;
+  font-size:14px;
+  margin:4px 0;
+}
+
+.center-screen{
+  min-height:100vh;
+  display:grid;
+  place-items:center;
 }
