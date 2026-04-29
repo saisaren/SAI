@@ -101,17 +101,29 @@ export default function NovaHome() {
       <div className="nova-glow"></div>
 
       {/* HEADER */}
-      <header className="nova-header">
-        <div>
-          <p className="muted">{greeting}</p>
-          <h1>Life Dock</h1>
-          <span className="muted">
-            Your personal command center
-          </span>
-        </div>
+   <header className="nova-header">
+  <div className="brand">
+    <img
+      src="/Nova.png"
+      alt="Nova Logo"
+      className="brand-logo"
+    />
 
-        <button className="ghost-btn">Nova</button>
-      </header>
+    <div>
+      <p className="muted">Welcome Back</p>
+
+      <h1>Nova</h1>
+
+      <span className="muted">
+        Private productivity system
+      </span>
+    </div>
+  </div>
+
+  <button className="ghost-btn">
+    Dashboard
+  </button>
+</header>
 
       <div className="nova-grid">
         {/* LEFT SIDE */}
